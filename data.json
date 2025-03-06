@@ -1,0 +1,74 @@
+{
+    "runes": {
+        "A": "Ansuz", "B": "Berkana", "C": "Cen", "D": "Dagaz", "E": "Ehwaz",
+        "F": "Fehu", "G": "Gebo", "H": "Hagalaz", "I": "Isa", "J": "Jera",
+        "K": "Kenaz", "L": "Laguz", "M": "Mannaz", "N": "Nauthiz", "O": "Othala",
+        "P": "Perthro", "Q": "Raidho", "R": "Raidho", "S": "Sowilo", "T": "Tiwaz",
+        "U": "Uruz", "V": "Wunjo", "W": "Wunjo", "X": "Gebo", "Y": "Jera", "Z": "Algiz"
+    },
+    "tarot": {
+        "0": "The Fool", "1": "The Magician", "2": "The High Priestess", "3": "The Empress",
+        "4": "The Emperor", "5": "The Hierophant", "6": "The Lovers", "7": "The Chariot",
+        "8": "Strength", "9": "The Hermit", "10": "Wheel of Fortune", "11": "Justice",
+        "12": "The Hanged Man", "13": "Death", "14": "Temperance", "15": "The Devil",
+        "16": "The Tower", "17": "The Star", "18": "The Moon", "19": "The Sun",
+        "20": "Judgment", "21": "The World"
+    },
+    "numerology": {
+        "1": "Лидерство, амбиции, независимость",
+        "2": "Чувствительность, дипломатия, сотрудничество",
+        "3": "Креативность, общительность, энергия",
+        "4": "Структура, стабильность, трудолюбие",
+        "5": "Изменения, свобода, приключения",
+        "6": "Ответственность, любовь, забота",
+        "7": "Интеллект, анализ, духовность",
+        "8": "Материальный успех, власть, достижения",
+        "9": "Гуманизм, сострадание, мудрость"
+    },
+    "planets": {
+        "A": "Mercury", "B": "Venus", "C": "Mars", "D": "Jupiter", "E": "Saturn",
+        "F": "Uranus", "G": "Neptune", "H": "Pluto", "I": "Sun", "J": "Moon",
+        "K": "Mars", "L": "Venus", "M": "Mercury", "N": "Jupiter", "O": "Saturn",
+        "P": "Uranus", "Q": "Neptune", "R": "Pluto", "S": "Sun", "T": "Moon",
+        "U": "Mercury", "V": "Venus", "W": "Mars", "X": "Jupiter", "Y": "Saturn", "Z": "Uranus"
+    },
+    "astrology": {
+        "Sun": "Эго, самореализация, жизненная сила",
+        "Moon": "Эмоции, интуиция, подсознание",
+        "Mercury": "Коммуникация, мышление, интеллект",
+        "Venus": "Любовь, красота, гармония",
+        "Mars": "Энергия, действие, агрессия",
+        "Jupiter": "Расширение, удача, рост",
+        "Saturn": "Структура, дисциплина, карма",
+        "Uranus": "Изменения, оригинальность, независимость",
+        "Neptune": "Мечты, иллюзии, духовность",
+        "Pluto": "Трансформация, глубина, возрождение"
+    },
+    "psychology": [
+        {
+            "type": "Лидер",
+            "description": "Человек, стремящийся к власти, организатор, принимает решения быстро, но может быть авторитарным.",
+            "big_five": {"Openness": 70, "Conscientiousness": 90, "Extraversion": 80, "Agreeableness": 40, "Neuroticism": 30}
+        },
+        {
+            "type": "Интеллектуал",
+            "description": "Глубокий мыслитель, любит анализировать, склонен к самоанализу и философским размышлениям.",
+            "big_five": {"Openness": 90, "Conscientiousness": 70, "Extraversion": 40, "Agreeableness": 60, "Neuroticism": 50}
+        },
+        {
+            "type": "Искатель приключений",
+            "description": "Любит риск, путешествия, быстро увлекается, но может быть непостоянным.",
+            "big_five": {"Openness": 80, "Conscientiousness": 40, "Extraversion": 90, "Agreeableness": 50, "Neuroticism": 60}
+        },
+        {
+            "type": "Эмпат",
+            "description": "Чувствительный, заботливый, всегда старается поддержать других, но может терять себя в чужих проблемах.",
+            "big_five": {"Openness": 60, "Conscientiousness": 70, "Extraversion": 50, "Agreeableness": 90, "Neuroticism": 70}
+        },
+        {
+            "type": "Рационалист",
+            "description": "Объективный, логически мыслящий, принимает решения на основе фактов, не любит неопределённость.",
+            "big_five": {"Openness": 50, "Conscientiousness": 80, "Extraversion": 40, "Agreeableness": 60, "Neuroticism": 30}
+        }
+    ]
+}
