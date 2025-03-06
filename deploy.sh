@@ -1,24 +1,73 @@
-#!/bin/bash
+import re
+import json
+import random
+import pandas as pd
+from collections import Counter
+from fastapi import FastAPI, HTTPException
+import uvicorn
+import os
+from supabase import create_client, Client
+import logging
+from cachetools import TTLCache
+from config import SUPABASE_URL, SUPABASE_KEY
+from utils import name_to_runes, name_to_tarot, name_to_numerology, name_to_astrology, generate_psychology_analysis
 
-# Deploy to Heroku or Render
+# Logging setup
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
-# Step 1: Log in to Heroku (if using Heroku)
-echo "Logging into Heroku..."
-heroku login
+# Supabase database connection
+supabase_client: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
-# Step 2: Set up Heroku App
-echo "Creating Heroku App..."
-heroku create name-analysis-api
+# Cache for optimizing repeated queries
+cache = TTLCache(maxsize=1000, ttl=3600)  # Cache results for 1 hour
 
-echo "Setting environment variables..."
-heroku config:set SUPABASE_URL="your-supabase-url" SUPABASE_KEY="your-supabase-key"
+# Initialize FastAPI
+app = FastAPI()
 
-# Step 3: Push code to Heroku
-echo "Deploying to Heroku..."
-git add .
-git commit -m "Deploying API"
-git push heroku main
+# Main function to analyze name
+def analyze_name(name: str):
+    name = re.sub(r'[^a-zA-Z]', '', name).strip()  # Remove non-alphabetic characters
+    if not name:
+        raise HTTPException(status_code=400, detail="Name cannot be empty")
+    
+    # Check cache first
+    if name in cache:
+        logging.info(f"Cache hit for {name}")
+        return cache[name]
+    
+    # Check Supabase database
+    existing_entry = supabase_client.table("users_analysis").select("*").eq("name", name).execute()
+    if existing_entry.data:
+        result = json.loads(existing_entry.data[0]["result"])
+        cache[name] = result  # Store in cache
+        return result
+    
+    # Generate new analysis
+    runes = name_to_runes(name)
+    tarot = name_to_tarot(name)
+    numerology, numerology_meaning = name_to_numerology(name)
+    astrology, astrology_description = name_to_astrology(name)
+    psychology = generate_psychology_analysis(name)
 
-# Step 4: Open the app
-echo "Opening the deployed application..."
-heroku open
+    result = {
+        "Name": name,
+        "Runic Analysis": runes,
+        "Tarot Archetypes": tarot,
+        "Numerology": {"Number": numerology, "Meaning": numerology_meaning},
+        "Astrology": {"Planet": astrology, "Description": astrology_description},
+        "Psychological Profile": psychology
+    }
+    
+    # Store in database and cache
+    supabase_client.table("users_analysis").insert({"name": name, "result": json.dumps(result)}).execute()
+    cache[name] = result
+    
+    return result
+
+@app.get("/analyze/{name}")
+def analyze_name_api(name: str):
+    return analyze_name(name)
+
+if __name__ == "__main__":
+    port = int(os.getenv("PORT", 8000))  # Use Render/Heroku assigned port
+    uvicorn.run(app, host="0.0.0.0", port=port)
