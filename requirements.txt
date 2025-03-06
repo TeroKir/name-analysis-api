@@ -3,3 +3,4 @@ uvicorn==0.22.0
 supabase==1.0.3
 cachetools==5.3.1
 pandas==2.0.3
+numpy==1.23.5  # Fixes the dtype size mismatch issue
